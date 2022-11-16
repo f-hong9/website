@@ -1,0 +1,563 @@
+/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+*, *::after, *::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*::after, *::before {
+  content: '';
+}
+
+body {
+  font-size: 100%;
+  font-family: monospace;
+  color: #66FCF1;
+  background-color: #1F2833; /* Change After*/
+}
+
+a {
+  color: #1f1f1f; /* Change After*/
+  text-decoration: none;
+}
+
+/* -------------------------------- 
+
+Main components 
+
+-------------------------------- */
+html, body {
+  height: 100%;
+  overflow-y:auto;
+}
+
+header {
+  z-index: 3;
+}
+
+.cd-logo, .cd-nav-trigger {
+  position: fixed;
+  display: inline-block;
+}
+
+.cd-logo {
+  left: 2%;
+}
+.cd-logo img {
+  display: block;
+  width:20%;
+  height: 20%;
+}
+
+.cd-nav-trigger {
+  top: 18px;
+  right: 5%;
+  height: 44px;
+  width: 44px;
+  z-index: 5;
+  /* image replacement */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+.cd-nav-trigger .cd-icon {
+  /* icon created in CSS */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  display: inline-block;
+  width: 18px;
+  height: 3px;
+  background-color: #1F2833; /* Color for 2nd line */
+  z-index: 10;
+}
+.cd-nav-trigger .cd-icon::before, .cd-nav-trigger .cd-icon:after {
+  /* upper and lower lines of the menu icon */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1F2833; /* Color for 1st and 3rd line*/
+  /* Force Hardware Acceleration in WebKit */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /* apply transition to transform property */
+  -webkit-transition: -webkit-transform .3s;
+  -moz-transition: -moz-transform .3s;
+  transition: transform .3s;
+}
+.cd-nav-trigger .cd-icon::before {
+  -webkit-transform: translateY(-6px) rotate(0deg);
+  -moz-transform: translateY(-6px) rotate(0deg);
+  -ms-transform: translateY(-6px) rotate(0deg);
+  -o-transform: translateY(-6px) rotate(0deg);
+  transform: translateY(-6px) rotate(0deg);
+}
+.cd-nav-trigger .cd-icon::after {
+  -webkit-transform: translateY(6px) rotate(0deg);
+  -moz-transform: translateY(6px) rotate(0deg);
+  -ms-transform: translateY(6px) rotate(0deg);
+  -o-transform: translateY(6px) rotate(0deg);
+  transform: translateY(6px) rotate(0deg);
+}
+.cd-nav-trigger::before, .cd-nav-trigger::after {
+  /* 2 rounded colored backgrounds for the menu icon */
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  /* Force Hardware Acceleration in WebKit */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  transition-property: transform;
+}
+.cd-nav-trigger::before {
+  background-color: #f0f0f0; /* Color of circle before hamburger to x*/
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-delay: 0.4s;
+  -moz-transition-delay: 0.4s;
+  transition-delay: 0.4s;
+}
+.cd-nav-trigger::after {
+  background-color: #1F2833; /* Color of circle after hamburger to x*/
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  transition-duration: 0s;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  transition-delay: 0s;
+}
+.cd-nav-trigger.close-nav::before {
+  /* user clicks on the .cd-nav-trigger element - 1st rounded background disappears */
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+.cd-nav-trigger.close-nav::after {
+  /* user clicks on the .cd-nav-trigger element - 2nd rounded background appears */
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-delay: 0.4s;
+  -moz-transition-delay: 0.4s;
+  transition-delay: 0.4s;
+}
+.cd-nav-trigger.close-nav .cd-icon {
+  /* user clicks on the .cd-nav-trigger element - transform the icon */
+  background-color: rgba(255, 255, 255, 0); /* transforms icon */
+}
+.cd-nav-trigger.close-nav .cd-icon::before, .cd-nav-trigger.close-nav .cd-icon::after {
+  background-color: #f0f0f0; /* Change Black Hamburger to White X*/
+}
+.cd-nav-trigger.close-nav .cd-icon::before {
+  -webkit-transform: translateY(0) rotate(45deg);
+  -moz-transform: translateY(0) rotate(45deg);
+  -ms-transform: translateY(0) rotate(45deg);
+  -o-transform: translateY(0) rotate(45deg);
+  transform: translateY(0) rotate(45deg);
+}
+.cd-nav-trigger.close-nav .cd-icon::after {
+  -webkit-transform: translateY(0) rotate(-45deg);
+  -moz-transform: translateY(0) rotate(-45deg);
+  -ms-transform: translateY(0) rotate(-45deg);
+  -o-transform: translateY(0) rotate(-45deg);
+  transform: translateY(0) rotate(-45deg);
+}
+
+.nav-header {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-weight: bold;
+  position: relative;
+  transform: translateZ(0);
+  text-align: center;
+}
+
+.nav-header-text {
+  padding: 0 10px;
+  z-index: 1;
+  position: relative;
+  background-color: #f0f0f0; /* Change After*/
+  color: #1F2833;
+}
+
+.nav-header-line, .nav-header-line-2 {
+  display: block;
+  height: 2px;
+  width: 100%;
+  z-index: -1;
+  background-color: #1F2833; /* Change After*/
+  position: absolute;
+  top: 6px;
+  transform: scaleX(.3);
+}
+
+.nav-sublinks {
+  font-size: 0.4em;
+  color: #1F2833;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  /* border-top: 2px solid #1F2833;
+  border-bottom: 2px solid #1F2833; */
+  box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.3);
+  width: 50%;
+  left: 25%;
+  text-align: center;
+  position: relative;
+}
+
+.nav-sublink {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 0;
+  width: 32%;
+  vertical-align: middle;
+}
+
+.cd-primary-nav {
+  /* by default it's hidden */
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 80px 5%;
+  padding-top:160px;
+  z-index: 3;
+  background-color: #f0f0f0;  /* Change After*/
+  overflow: auto;
+  /* this fixes the buggy scrolling on webkit browsers - mobile devices only - when overflow property is applied */
+  -webkit-overflow-scrolling: touch;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s, opacity 0.3s;
+  -moz-transition: visibility 0s, opacity 0.3s;
+  transition: visibility 0s, opacity 0.3s;
+}
+
+.cd-primary-nav li {
+  margin: 1.6em 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+.cd-primary-nav a {
+  font-size: 20px;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: color 0.2s;
+  -moz-transition: color 0.2s;
+  transition: color 0.2s;
+}
+.no-touch .cd-primary-nav a:hover {
+  color: #ffffff;
+}
+.cd-primary-nav.fade-in {
+  /* navigation visible at the end of the circle animation */
+  visibility: visible;
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+  .cd-primary-nav li {
+    margin: 2em 0;
+  }
+  .cd-primary-nav a {
+    font-size: 28px;
+    font-size: 1.75rem;
+  }
+  .cd-primary-nav a {
+    font-size: 28px;
+    font-size: 1.75rem;
+  }
+}
+@media only screen and (min-width: 1170px) {
+  .cd-primary-nav li {
+    margin: 2.6em 0;
+  }
+  .cd-primary-nav a {
+    font-size: 32px;
+    font-size: 1.2rem;
+  }
+}
+
+.cd-overlay-nav, .cd-overlay-content {
+  /* containers of the 2 main rounded backgrounds - these containers are used to position the rounded bgs behind the menu icon */
+  position: fixed;
+  top: 18px;
+  right: 5%;
+  height: 4px;
+  width: 4px;
+  -webkit-transform: translateX(-20px) translateY(20px);
+  -moz-transform: translateX(-20px) translateY(20px);
+  -ms-transform: translateX(-20px) translateY(20px);
+  -o-transform: translateX(-20px) translateY(20px);
+  transform: translateX(-20px) translateY(20px);
+}
+.cd-overlay-nav span, .cd-overlay-content span {
+  display: inline-block;
+  position: absolute;
+  border-radius: 50%;
+  /* Force Hardware Acceleration in WebKit */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+.cd-overlay-nav.is-hidden, .cd-overlay-content.is-hidden {
+  /* background fades out at the end of the animation */
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+
+.cd-overlay-nav {
+  /* main rounded colored bg 1 */
+  z-index: 2;
+}
+.cd-overlay-nav span {
+  background-color: #f0f0f0;/* Press hamburger; Transition color of Page*/
+}
+
+.cd-overlay-content {
+  /* main rounded colored bg 2 */
+  z-index: 4;
+}
+.cd-overlay-content span {
+  background-color: #1F2833; /* Press x ; Transition color of Page */
+}
+
+.cd-content {
+  /* just some dummy content */
+  padding: 80px 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height:100%;
+  z-index: 3;
+}
+
+.cd-title, .cd-subtitle{
+  height: 200px;
+  padding-top: 4.6em;
+  position:relative;
+  text-transform: uppercase;
+  transform: translateZ(0);
+  text-align: center;
+}
+
+.cd-title-text, .cd-subtitle-text{
+  font-size: 65px;
+  font-weight: 600;
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+  background-color: #1F2833;
+  /* font-size: 1.25rem; */
+}
+
+.cd-title-line, .cd-subtitle-line {
+  display: block;
+  height: 2px;
+  width: 100%;
+  z-index: -1;
+  background-color: #66FCF1;
+  position: absolute;
+  top: 110px;
+  transform: scaleX(.3);
+}
+
+.cd-subtitle {
+  padding-top: 2.5em;
+  height: 50px;
+}
+
+.cd-subtitle-text {
+  font-size: 25px;
+}
+
+.cd-subtitle .cd-subtitle-line {
+  top: 45px;
+  width: 50%;
+  left: 25%;
+}
+
+.cd-content p {
+  line-height: 5;
+  color: #f0f0f0;
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-content .cd-title {
+    height: 250px;
+    padding-top: 6em;
+  }
+  .cd-content h1 {
+    font-size: 28px;
+    font-size: 1.75rem;
+  }
+  .cd-content p {
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 1.8;
+  }
+}
+
+/*  INTRO */
+
+.intro {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.intro .left-text {
+  flex: .6 1;
+  text-align: left;
+}
+
+.intro .left-text .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    padding-left: 50px;
+    width: 100%;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.intro .left-text .wrapper h1{
+  font-size: 60px;
+  width: 100%;
+  position: relative;
+  color: #1F2833;
+}
+
+.intro .left-text .wrapper p{
+  width: 100%;
+  font-size: 15px;
+  margin: 0 0 0 0;
+  line-height: 50px;
+  color: #1F2833;
+}
+
+.intro .right-text {
+  flex: .4 1;
+  display: flex;
+}
+
+.intro .right-text .imgContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ityped-cursor {
+  font-size: 1em;
+  opacity: 1;
+  -webkit-animation: blink 0.3s infinite;
+  -moz-animation: blink 0.3s infinite;
+  animation: blink 0.3s infinite;
+  animation-direction: alternate;
+}
+@keyframes blink {
+  100% {
+      opacity: 0;
+  }
+}
+
+@-webkit-keyframes blink {
+  100% {
+      opacity: 0;
+  }
+}
+
+@-moz-keyframes blink {
+  100% {
+      opacity: 0;
+  }
+}
+
+/* About Us */
+
+.cd-aboutus img{
+  float: left;
+  margin-right: 30px;
+  width: 30%;
+  border-radius: 20%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cd-aboutus p{
+  text-align: justify;
+  font-size: 18px;
+  /* text-transform: uppercase; */
+  word-spacing: 2px;
+}
+
